@@ -1,0 +1,227 @@
+<html>
+  <head>
+    {{> head}}
+  </head>
+  <style>
+    #modal-join {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+      z-index: 1000;
+    }
+
+    #modal-create {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+      z-index: 1000;
+    }
+
+    #overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 900;
+    }
+
+    #close-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      cursor: pointer;
+    }
+  </style>
+  <body>
+    <div class="bg-neutral-800 px-32 py-16 min-h-screen w-full">
+      <!-- <h2>Game code</h2>
+      <input
+        type="text"
+        id="codeInput"
+      />
+      <button id="createGame">Create game</button>
+      <button id="joinGame">Join game</button>
+      <div
+        style="color: red"
+        id="errorMessage"
+      ></div> -->
+
+      <div
+        class="grid grid-cols-1 gap-4 pb-16 lg:grid-cols-2 lg:gap-8 h-[500px]"
+      >
+        <div class="bg-neutral-900 flex justify-center items-center rounded-lg">
+          <div
+            id="myBoard"
+            class="w-[400px]"
+          ></div>
+        </div>
+
+        <div class="flex flex-col justify-center items-center rounded-lg">
+          <div class="flex flex-col justify-between h-full max-w-4xl">
+            <div class="flex flex-col items-center">
+              <span class="text-white text-5xl font-bold">Play Chess</span>
+              <span class="text-white text-5xl font-bold">Online</span>
+              <span class="text-white text-5xl font-bold">on the #7 Site!</span>
+            </div>
+
+            <div class="flex justify-between items-center">
+              <div>
+                <span class="text-white text-md font-bold">13,909,662</span>
+                <span class="text-neutral-400 text-md font-semibold"
+                  >Game Today</span
+                >
+              </div>
+              <div class="text-neutral-800">aaa</div>
+              <div>
+                <span class="text-white text-md font-bold">171,457</span>
+                <span class="text-neutral-400 text-md font-semibold"
+                  >Playing Now</span
+                >
+              </div>
+            </div>
+
+            <div>
+              <button
+                onclick="openModalJoin()"
+                class="bg-lime-600 flex items-center h-20 w-full text-white rounded-lg hover:bg-lime-500"
+              >
+                <div class="w-2/6">Icon</div>
+                <div class="flex flex-col items-start w-4/6">
+                  <span class="text-2xl font-bold">Join Room</span>
+                  <span class="text-sm font-regular"
+                    >Play with my friend use room code</span
+                  >
+                </div>
+              </button>
+              <div id="overlay"></div>
+              <div
+                id="modal-join"
+                class="bg-neutral-800 rounded-lg text-white"
+              >
+                <div
+                  id="close-btn"
+                  onclick="closeModalJoin()"
+                  class="font-bold pr-2"
+                >
+                  X
+                </div>
+                <div class="p-4">
+                  <input
+                    type="text"
+                    id="codeInputJoin"
+                    placeholder="Enter code here.."
+                    class="bg-neutral-600 rounded-lg p-2 m-2"
+                  />
+                  <button
+                    id="joinGame"
+                    class="pl-2"
+                  >
+                    Join Game
+                  </button>
+                  <div
+                    style="color: red"
+                    id="errorMessage"
+                    class="pl-2"
+                  ></div>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <button
+                onclick="openModalCreate()"
+                class="bg-neutral-700 flex items-center h-20 w-full text-white rounded-lg hover:bg-neutral-600"
+              >
+                <div class="w-2/6">Icon</div>
+                <div class="flex flex-col items-start w-4/6">
+                  <span class="text-2xl font-bold">Create Room</span>
+                  <span class="text-sm font-regular"
+                    >Create with my room and waiting..</span
+                  >
+                </div>
+              </button>
+              <div id="overlay"></div>
+              <div
+                id="modal-create"
+                class="bg-neutral-800 rounded-lg text-white"
+              >
+                <div
+                  id="close-btn"
+                  onclick="closeModalCreate()"
+                  class="font-bold pr-2"
+                >
+                  X
+                </div>
+                <div class="p-4">
+                  <input
+                    type="text"
+                    id="codeInputCreate"
+                    placeholder="Enter code here.."
+                    class="bg-neutral-600 rounded-lg p-2 m-2"
+                  />
+                  <button
+                    id="createGame"
+                    class="pl-2"
+                  >
+                    Create Game
+                  </button>
+                  <div
+                    style="color: red"
+                    id="errorMessage"
+                    class="pl-2"
+                  ></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-neutral-900 w-full h-96 rounded-lg"></div>
+    </div>
+
+    <script>
+      function openModalJoin() {
+        document.getElementById("modal-join").style.display = "block"
+        document.getElementById("overlay").style.display = "block"
+      }
+      function closeModalJoin() {
+        document.getElementById("modal-join").style.display = "none"
+        document.getElementById("overlay").style.display = "none"
+      }
+      function openModalCreate() {
+        document.getElementById("modal-create").style.display = "block"
+        document.getElementById("overlay").style.display = "block"
+      }
+      function closeModalCreate() {
+        document.getElementById("modal-create").style.display = "none"
+        document.getElementById("overlay").style.display = "none"
+      }
+    </script>
+
+    <script>
+      $("#joinGame").on("click", function () {
+        window.location.replace("/black?code=" + $("#codeInputJoin").val())
+      })
+      $("#createGame").on("click", function () {
+        window.location.replace("/white?code=" + $("#codeInputCreate").val())
+      })
+      var urlParams = new URLSearchParams(window.location.search)
+      if (urlParams.get("error") == "invalidCode") {
+        $("#errorMessage").text("Invalid invite code")
+      }
+    </script>
+    <script src="/public/js/index.js"></script>
+  </body>
+</html>
